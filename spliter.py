@@ -10,7 +10,7 @@ def split(day: str):
     zip_file: zipfile.ZipFile = zipfile.ZipFile("save/{}.zip".format(day), mode="w")
 
     for i_ticker, group_df in df.groupby("銘柄コード"):
-        group_df.to_csv(zip.write("{}.csv".format(i_ticker)))
+        group_df.to_csv(zip_file.write("{}.csv".format(i_ticker)), index=False)
 
 
 if __name__ == '__main__':
