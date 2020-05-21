@@ -2,10 +2,11 @@ import argparse
 import zipfile
 from joblib import Parallel, delayed
 import pandas as pd
+import dask.dataframe as dd
 
 
 def split(day: str):
-    df: pd.read_csv = pd.read_csv("data/StandardEquities_{}_out.csv".format(day))
+    df: pd.read_csv = dd.read_csv("data/StandardEquities_{}_out.csv".format(day)).compute()
     zip_file: zipfile.ZipFile = zipfile.ZipFile("save/{}.zip".format(day), mode="w")
 
     def zip_save(i_ticker, group_df: pd.DataFrame, zip: zipfile.ZipFile):
