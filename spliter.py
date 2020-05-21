@@ -11,8 +11,9 @@ def split(day: str):
 
     def zip_save(i_ticker, group_df: pd.DataFrame, zip: zipfile.ZipFile):
         group_df.to_csv(zip.write("{}.csv".format(i_ticker)))
-    Parallel(n_jobs=1, verbose=10)([delayed(zip_save)(i_ticker=i_ticker, group_df=group, zip=zip_file)
-                                    for i_ticker, group in df.groupby("銘柄コード")])
+
+    for i_ticker, group in df.groupby("銘柄コード")]):
+        zip_save(i_ticker=i_ticker, group_df=group, zip=zip_file)
 
 
 if __name__ == '__main__':
