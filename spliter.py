@@ -1,15 +1,14 @@
 import argparse
 import zipfile
-from joblib import Parallel, delayed
+from tqdm import tqdm
 import pandas as pd
-import dask.dataframe as dd
 
 
 def split(day: str):
     df: pd.read_csv = pd.read_csv("data/StandardEquities_{}_out.csv".format(day))
     zip_file: zipfile.ZipFile = zipfile.ZipFile("save/{}-py.zip".format(day), mode="w")
 
-    for i_ticker, group_df in df.groupby("銘柄コード"):
+    for i_ticker, group_df in tqdm(df.groupby("銘柄コード")):
         group_df.to_csv(zip_file.write("{}.csv".format(i_ticker)), index=False)
 
 
