@@ -6,7 +6,7 @@ if [ $(($(wc -l "save/$1/"* | tail -n 1 | sed -E "s/total//" | bc) - $(ls "save/
   exit 1
 else
   cd save
-  if [ $(ls "$1/"* | xargs -I {} -P 32 uniq -d {} | wc -l) != 0 ]; then
+  if [ $(ls "$1/"* | xargs -I {} -P 32 uniq -d {} | wc -l) -ge 8000 ]; then
     echo "check error"
     exit 1
   else
