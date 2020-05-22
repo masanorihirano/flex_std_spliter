@@ -42,7 +42,7 @@ def split(day: str):
                                                  "買　気配７（数量）": object, "買　気配８（価格）": object,
                                                  "買　気配８（数量）": object, "買　ＵＮＤＥＲ（数量）": object})
             io_object.close()
-            if not (len(df) == interval or ((i == i_max - 1) and len(df) == (rows - 1)%interval)):
+            if not (len(df) == interval or ((i == i_max - 1) and len(df) == (rows - 1) % interval)):
                 raise Exception("Data parse error")
             for i_ticker, group_df in df.groupby("銘柄コード"):
                 file_name: str = "save/{}/{}.csv".format(day, i_ticker)
