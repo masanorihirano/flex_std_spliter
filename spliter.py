@@ -8,7 +8,7 @@ def split(day: str):
     df: pd.read_csv = pd.read_csv("data/StandardEquities_{}_out.csv".format(day))
     zip_file: zipfile.ZipFile = zipfile.ZipFile("save/{}-py.zip".format(day), mode="a")
 
-    for i in range(len(df) // 10000 + 1):
+    for i in tqdm(range(len(df) // 10000 + 1)):
         for i_ticker, group_df in df[(i * 10000) : min((i+1) * 10000, len(df))].groupby("銘柄コード"):
             file_name: str = "{}/{}.csv".format(day, i_ticker)
             exists: bool = file_name in zip_file.namelist()
