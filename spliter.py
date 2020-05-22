@@ -18,7 +18,7 @@ def split(day: str):
         header = pd.read_csv(io.StringIO(f.readline()), nrows=0).columns
         for i in tqdm(range(i_max)):
             io_object: io.StringIO = io.StringIO()
-            for j in range(interval):
+            for _ in range(interval):
                 io_object.write(f.readline())
             df: pd.read_csv = pd.read_csv(io.StringIO(io_object.getvalue()), header=None, names=header,
                                           dtype={"情報種別": object, "取引所種別": object, "マルチキャストグループ": object,
