@@ -45,6 +45,8 @@ def split(day: str):
             if not (len(df) == interval or ((i == i_max - 1) and len(df) == (rows - 1) % interval)):
                 raise Exception("Data parse error")
             for i_ticker, group_df in df.groupby("銘柄コード"):
+                if i_ticker == "銘柄コード":
+                    raise Exception
                 file_name: str = "save/{}/{}.csv".format(day, i_ticker)
                 exists: bool = os.path.exists(file_name)
                 group_df.to_csv(open(file_name, mode="a"), index=False, header=(not exists))
