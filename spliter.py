@@ -6,7 +6,8 @@ import pandas as pd
 
 
 def split(day: str):
-    shutil.rmtree("save/{}".format(day))
+    if os.path.exist("save/{}".format(day)):
+        shutil.rmtree("save/{}".format(day))
     os.mkdir("save/{}".format(day))
     input_file = "data/StandardEquities_{}_out.csv".format(day)
     rows = sum([1 for _ in open(input_file)])
